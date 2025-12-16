@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wildfly
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wildfly
+  template:
+    metadata:
+      labels:
+        app: wildfly
+    spec:
+        containers:
+          - name: wildfly
+            image: my-wildfly:latest
+            imagePullPolicy: Never
+            env:
+              - name: DB_NAME
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-credentials
+                    key: POSTGRES_DB
+              - name: DB_USER
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-credentials
+                    key: POSTGRES_USER
+              - name: DB_PASS
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-credentials
+                    key: POSTGRES_PASSWORD
+              - name: DB_HOST
+                value: dev-pg-postgresql
+              - name: DB_PORT
+                value: "5432"
+            ports:
+              - containerPort: 8080
+              - containerPort: 9990

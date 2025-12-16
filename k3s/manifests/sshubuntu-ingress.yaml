@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sshubuntu
+  namespace: default
+spec:
+  tls:
+    - hosts:
+        - sshubuntu.ru
+      secretName: sshubuntu-tls
+  rules:
+    - host: sshubuntu.ru
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: traefik-ingress
+                port:
+                  number: 80
