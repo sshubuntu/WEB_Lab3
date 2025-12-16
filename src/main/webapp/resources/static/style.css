@@ -1,0 +1,237 @@
+ :root {
+    --brand: #2563eb;
+    --bg: #0b1020;
+    --panel: #0f172a;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+    color: var(--text);
+    background: linear-gradient(180deg, #0b1020, #0b1327 40%, #0a0f1e);
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.header {
+    grid-column: 1 / -1;
+    background: var(--panel);
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.header h1 {
+    margin: 0 0 6px 0;
+    font-size: 22px;
+    letter-spacing: 0;
+}
+
+.header .meta {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.header .actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.card {
+    background: var(--panel);
+    border: 1px solid rgba(148, 163, 184, .12);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+}
+
+.card h3 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: #cbd5e1;
+}
+
+.form {
+    display: grid;
+    gap: 14px;
+}
+
+.field {
+    display: grid;
+    gap: 8px;
+}
+
+.field > label {
+    font-weight: 600;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+}
+
+.controls .control {
+    padding: 8px 10px;
+    border: 1px dashed rgba(148, 163, 184, .25);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn,
+button,
+input[type="submit"] {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, .25);
+    background: #111827;
+    color: var(--text);
+    cursor: pointer;
+    font-weight: 600;
+    transition: border-color .2s ease;
+}
+
+.btn.primary,
+button.submit {
+    background: var(--brand);
+    border-color: transparent;
+    color: white;
+}
+
+.btn:hover,
+button:hover,
+input[type="submit"]:hover {
+    border-color: rgba(148, 163, 184, .45);
+}
+
+.btn.ghost {
+    background: transparent;
+}
+
+input[type="text" i] {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, .25);
+    background: #0b1324;
+    color: var(--text);
+}
+
+input[type="text"]::placeholder {
+    color: #7a8aa1;
+}
+
+input:focus,
+button:focus {
+    outline: 2px solid rgba(37, 99, 235, .5);
+    outline-offset: 2px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(148, 163, 184, .15);
+    font-variant-numeric: tabular-nums;
+}
+
+.table th {
+    color: #cbd5e1;
+    font-weight: 700;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, .15);
+    color: #93c5fd;
+    border: 1px solid rgba(37, 99, 235, .35);
+    font-weight: 700;
+}
+
+.badge.fail {
+    background: rgba(239, 68, 68, .12);
+    color: #fecaca;
+    border-color: rgba(239, 68, 68, .35);
+}
+
+.canvas-box {
+    display: grid;
+    place-items: center;
+    height: 100%;
+}
+
+canvas {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 1/1;
+    background: #0b1324;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, .18);
+    cursor: crosshair;
+}
+
+.errors {
+    display: grid;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.errors .err {
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: rgba(239, 68, 68, .12);
+    color: #fecaca;
+    border: 1px solid rgba(239, 68, 68, .35);
+}
+
+.clock {
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+@media (max-width: 968px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+

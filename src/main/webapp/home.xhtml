@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/base.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html">
+    <ui:define name="title">WEB Lab 3</ui:define>
+    <ui:define name="head-extra">
+        <h:outputStylesheet library="static" name="watch/watch-compiled.css"/>
+    </ui:define>
+    <ui:define name="content">
+        <div class="wrapper">
+            <header class="header">
+                <div>
+                    <h1>Лаба №3</h1>
+                    <div class="meta">
+                        Студент: #{studentInfo.fullName} Группа: #{studentInfo.group} Вариант: #{studentInfo.variant}
+                    </div>
+                </div>
+                <div class="actions">
+                    <h:link outcome="toApp" styleClass="btn primary" value="Перейти к приложению"/>
+                </div>
+            </header>
+            
+            <div class="watch-container">
+                <div class="watch-wrapper">
+                    <div class="clock all">
+                        <div class="w-num"></div>
+                        <div class="w-num-g"></div>
+                        <div class="grd">
+                            <div class="w-ms"></div>
+                        </div>
+                        <div class="w-sec">
+                            <div class="sec-needle"></div>
+                        </div>
+                        <div class="w-min">
+                            <div class="min-needle"></div>
+                        </div>
+                        <div class="w-hour">
+                            <div class="hour-needle"></div>
+                        </div>
+                    </div>
+                    <div class="watch-datetime" id="watch-datetime"></div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+    <ui:define name="scripts">
+        <h:outputScript library="static" name="watch/watch-compiled.js"/>
+        <h:outputScript library="static" name="home.js"/>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.ironjacamar.org/doc/schema/datasources_1_6.xsd"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.ironjacamar.org/doc/schema/datasources_1_6.xsd
+                                 https://raw.githubusercontent.com/ironjacamar/ironjacamar/1.6.0/docs/schema/datasources_1_6.xsd">
+
+    <datasource jndi-name="java:jboss/datasources/PointsDS"
+                pool-name="PointsDS"
+                enabled="true"
+                use-java-context="true">
+        <connection-url>jdbc:postgresql://${db.host}:${db.port}/${db.name}</connection-url>
+        <driver>postgresql</driver>
+        <security>
+            <user-name>${db.user}</user-name>
+            <password>${db.pass}</password>
+        </security>
+        <validation>
+            <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker"/>
+            <background-validation>true</background-validation>
+            <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter"/>
+        </validation>
+    </datasource>
+</datasources>

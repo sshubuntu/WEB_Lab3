@@ -1,0 +1,247 @@
+.watch-container {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+  padding: 2rem;
+}
+
+.watch-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.watch-datetime {
+  color: var(--text, #e5e7eb);
+  font-size: 1.25rem;
+  text-align: center;
+  white-space: nowrap;
+
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 1000;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.clock {
+  height: 0;
+  width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transform: scale(0.5);
+  transform-origin: center center;
+}
+
+.clock:after {
+  content: '';
+  transform: translate(-50%, -50%);
+  background: #141515;
+  box-shadow: 0 0 0 1vh #ffffff;
+  border-radius: 99em;
+  position: absolute;
+  height: 1vh;
+  width: 1vh;
+  min-height: 0.125rem;
+  min-width: 0.125rem;
+}
+
+.clock.all {
+  position: relative;
+}
+
+.w-num {
+  position: relative;
+}
+
+.w-num .num {
+  position: absolute;
+  font-size: 4.25vh;
+  font-weight: 200;
+  transform: translate(-50%, -50%);
+}
+
+/* Numbers are positioned by JavaScript, but keeping original positions for reference */
+.w-num .num:nth-child(1) { top: -30vh; left: 0; }
+.w-num .num:nth-child(2) { top: -25.98vh; left: 15vh; }
+.w-num .num:nth-child(3) { top: -15vh; left: 25.98vh; }
+.w-num .num:nth-child(4) { top: 0; left: 30vh; }
+.w-num .num:nth-child(5) { top: 15vh; left: 25.98vh; }
+.w-num .num:nth-child(6) { top: 25.98vh; left: 15vh; }
+.w-num .num:nth-child(7) { top: 30vh; left: 0; }
+.w-num .num:nth-child(8) { top: 25.98vh; left: -15vh; }
+.w-num .num:nth-child(9) { top: 15vh; left: -25.98vh; }
+.w-num .num:nth-child(10) { top: 0; left: -30vh; }
+.w-num .num:nth-child(11) { top: -15vh; left: -25.98vh; }
+.w-num .num:nth-child(12) { top: -25.98vh; left: -15vh; }
+
+.w-num-g {
+  position: relative;
+}
+
+.w-num-g .num-g {
+  position: absolute;
+  font-size: 2.5vh;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  transform: translate(-50%, -50%);
+}
+
+.grd {
+  position: relative;
+}
+
+.w-ms {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.w-ms [class*="ms-"]:before {
+  height: 2.14vh;
+  width: 0.5vh;
+  max-width: 0.1875rem;
+  min-width: 0.0625rem;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 99em;
+  position: absolute;
+  bottom: 0;
+  content: '';
+}
+
+.w-ms [class*="ms-"]:nth-child(4n):before {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.w-ms [class*="ms-"]:nth-child(20n):before {
+  height: 4.69vh;
+  background: #ffffff;
+}
+
+.w-sec, .w-min, .w-hour {
+  height: 0;
+  width: 0;
+  position: relative;
+}
+
+.w-sec {
+  z-index: 99;
+}
+
+.w-min {
+  z-index: 97;
+}
+
+.sec-needle {
+  /* Анимация отключена, используется JavaScript для точной синхронизации */
+  -webkit-filter: contrast(1);
+}
+
+.sec-needle:before {
+  height: 21vh;
+  border-radius: 99em;
+  bottom: 0;
+  width: 0.5vh;
+  max-width: 0.0625rem;
+  background: #e57513;
+  box-shadow: 0 2.5vh 0 0 #e57513;
+  position: absolute;
+  transform: translateX(-50%);
+  content: '';
+}
+
+.sec-needle:after {
+  z-index: 99;
+  content: '';
+  transform: translate(-50%, -50%);
+  background: #141515;
+  box-shadow: 0 0 0 0.5vh #e57513;
+  border-radius: 50%;
+  position: absolute;
+  height: 1vh;
+  width: 1vh;
+  min-height: 0.125rem;
+  min-width: 0.125rem;
+}
+
+.min-needle {
+  animation: tictac 3600s linear infinite;
+  -webkit-filter: contrast(2);
+}
+
+.min-needle:before {
+  height: 3.8vh;
+  width: 0.5vh;
+  min-width: 0.03125rem;
+  background: #ffffff;
+  position: absolute;
+  content: "";
+  transform: translate(-50%, -100%);
+}
+
+.min-needle:after {
+  content: "";
+  transform: translateX(-50%);
+  background: #141515;
+  height: 13.5vh;
+  width: 1vh;
+  border: 0.5vh solid #ffffff;
+  border-radius: 1vh;
+  position: absolute;
+  bottom: 3.5vh;
+}
+
+.hour-needle {
+  animation: tictac 43200s linear infinite;
+  -webkit-filter: contrast(2);
+}
+
+.hour-needle:before {
+  height: 3.8vh;
+  width: 0.5vh;
+  min-width: 0.03125rem;
+  background: #ffffff;
+  position: absolute;
+  content: "";
+  transform: translate(-50%, -100%);
+}
+
+.hour-needle:after {
+  content: "";
+  transform: translateX(-50%);
+  background: #141515;
+  height: 8vh;
+  width: 1vh;
+  border: 0.5vh solid #ffffff;
+  border-radius: 1vh;
+  position: absolute;
+  bottom: 3.5vh;
+}
+
+@keyframes tictac {
+  from {
+    transform: rotateZ(0deg) translate(-50%, -50%);
+  }
+  to {
+    transform: rotateZ(360deg) translate(-50%, -50%);
+  }
+}
+
+.w-ms [class*="ms-"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+}
+

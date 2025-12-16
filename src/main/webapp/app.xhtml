@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/base.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core">
+    <ui:define name="title">WEB Lab 3</ui:define>
+    <ui:define name="content">
+        <div class="wrapper">
+            <header class="header">
+                <div>
+                    <h1>Лаба 3</h1>
+                    <div class="meta">
+                        Студент: #{studentInfo.fullName} Группа: #{studentInfo.group} Вариант: #{studentInfo.variant}
+                    </div>
+                </div>
+                <div class="actions">
+                    <h:link outcome="toHome" value="На стартовую" styleClass="btn ghost"/>
+                </div>
+            </header>
+
+            <section class="card">
+                <h:form id="pointForm" styleClass="form">
+                    <h:messages id="messages" showSummary="true" styleClass="errors"/>
+
+                    <div class="field">
+                        <label>Координата X</label>
+                        <div class="controls" id="x-buttons">
+                            <ui:repeat value="#{pointForm.allowedX}" var="xVal">
+                                <button type="button" class="btn" data-x-value="#{xVal}">#{xVal}</button>
+                            </ui:repeat>
+                        </div>
+                        <h:inputHidden id="xValue" value="#{pointForm.x}"/>
+                    </div>
+
+                    <div class="field">
+                        <label>Координата Y (от -3 до 5)</label>
+                        <h:inputText id="yInput"
+                                     value="#{pointForm.y}"
+                                     required="true"
+                                     requiredMessage="Введите значение Y"
+                                     converterMessage="Y должен быть числом"
+                                     maxlength="15">
+                            <f:validateDoubleRange minimum="-3" maximum="5"/>
+                        </h:inputText>
+                    </div>
+
+                    <div class="field">
+                        <label>Радиус R</label>
+                        <div class="controls" id="r-buttons">
+                            <ui:repeat value="#{pointForm.allowedR}" var="rVal">
+                                <button type="button" class="btn" data-r-value="#{rVal}">#{rVal}</button>
+                            </ui:repeat>
+                        </div>
+                        <h:inputHidden id="rValue" value="#{pointForm.r}"/>
+                    </div>
+
+                    <div class="field">
+                        <label>Проверить</label>
+                        <h:commandButton value="Отправить" styleClass="btn primary" action="#{pointForm.submit}"/>
+                    </div>
+                </h:form>
+            </section>
+
+            <section class="card canvas-box" aria-live="polite">
+                <div id="radius-holder">
+                    <span id="selected-radius" class="sr-only" data-radius=""></span>
+                </div>
+                <canvas id="plot" width="520" height="520" role="img" aria-label="Диаграмма области попадания точки"></canvas>
+                <div id="canvas-errors" class="errors" style="display:none;"></div>
+                <h:outputText id="initial-results"
+                              value="#{historyBean.resultsJson}"
+                              style="display:none;"
+                              escape="false"/>
+            </section>
+
+            <section class="card" style="grid-column: 1 / -1;">
+                <div class="card-header">
+                    <h3>История проверок</h3>
+                </div>
+                <table class="table" id="results-table">
+                    <thead>
+                    <tr>
+                        <th>Создано</th>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th>R</th>
+                        <th>Попадание</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ui:repeat value="#{historyBean.results}" var="row">
+                        <tr>
+                            <td>
+                                <h:outputText value="#{row.creationTime}">
+                                    <f:convertDateTime type="localDateTime" pattern="dd.MM.yyyy HH:mm:ss"/>
+                                </h:outputText>
+                            </td>
+                            <td><h:outputText value="#{row.x}"/></td>
+                            <td><h:outputText value="#{row.y}"/></td>
+                            <td><h:outputText value="#{row.r}"/></td>
+                            <td>
+                                <span class="badge #{row.hit ? '' : 'fail'}">
+                                    <h:outputText value="#{row.hit ? 'Да' : 'Нет'}"/>
+                                </span>
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                    </tbody>
+                </table>
+                <div class="actions" style="margin-top:16px;">
+                    <h:form>
+                        <h:commandButton value="Обновить таблицу"
+                                         styleClass="btn"
+                                         action="#{historyBean.refresh}"/>
+                    </h:form>
+                </div>
+            </section>
+        </div>
+    </ui:define>
+    <ui:define name="scripts">
+        <h:outputScript library="static" name="index.js"/>
+    </ui:define>
+</ui:composition>
+

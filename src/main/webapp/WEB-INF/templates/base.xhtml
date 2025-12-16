@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets">
+<h:head>
+    <title><ui:insert name="title">WEB Lab 3</ui:insert></title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <h:outputStylesheet library="static" name="style.css"/>
+    <ui:insert name="head-extra"/>
+</h:head>
+<h:body>
+    <ui:insert name="content"/>
+    <h:outputScript>
+        window.context = '#{request.contextPath}';
+    </h:outputScript>
+    <ui:insert name="scripts"/>
+</h:body>
+</html>
+
