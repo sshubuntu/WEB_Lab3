@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'com.sshubuntu'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+    withSourcesJar()
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    providedCompile
+}
+
+configurations.compileOnly.extendsFrom configurations.providedCompile
+configurations.annotationProcessor.extendsFrom configurations.providedCompile
+
+dependencies {
+    providedCompile 'jakarta.platform:jakarta.jakartaee-api:10.0.0'
+    implementation 'org.postgresql:postgresql:42.7.3'
+    compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
+
+war {
+    archiveFileName = 'WEB_Lab3.war'
+    destinationDirectory = file('wildfly-37.0.1.Final/wildfly-37.0.1.Final/standalone/deployments')
+}
+
